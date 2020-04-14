@@ -16,7 +16,8 @@ const routes = [
 //router assign
 const routers = new VueRouter({
     mode: 'history',
-    routes
+    routes,
+
 });
 
 export default routers;

@@ -21,5 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('/fetch/roles', "RolePermissionController@fetchRoles");
+    Route::get('/fetch/permissions', "RolePermissionController@fetchPermissions");
+    Route::post('/add-role', "RolePermissionController@saveRole");
     Route::view('/{any?}', 'backend.layouts.app');
 });
