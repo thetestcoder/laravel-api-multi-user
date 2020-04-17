@@ -24,7 +24,7 @@ class SaveRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          =>      'required|unique:roles',
+            'name'          =>      'required',
         ];
     }
 
@@ -32,7 +32,6 @@ class SaveRoleRequest extends FormRequest
     {
         return [
             'name.required'          =>      'Role Name is Necessary',
-            'name.unique'            =>      'Role Name is Already Exist',
         ];
     }
 }

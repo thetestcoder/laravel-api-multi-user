@@ -14,7 +14,12 @@
             <slot></slot>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              @click="onClose()"
+            >Close</button>
             <button type="button" class="btn btn-primary" @click="saveData">{{btnTitle}}</button>
           </div>
         </div>
@@ -30,6 +35,9 @@ export default {
     id: String,
     btnTitle: String,
     saveData: {
+      type: Function
+    },
+    onClose: {
       type: Function
     }
   }

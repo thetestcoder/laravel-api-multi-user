@@ -17,7 +17,7 @@ class RolePermissionController extends Controller
     //fetch roles
     public function fetchRoles()
     {
-        return Role::paginate(5);
+        return Role::paginate(10);
     }
     //fetch all permissions
     public function fetchPermissions()
@@ -31,9 +31,48 @@ class RolePermissionController extends Controller
     {
 
         $permission_ids = \array_filter($request->ids);
-        $role = Role::create(['name' => $request->name]);
+        $role = Role::updateOrCreate(
+            ['id' => $request->id],
+            ['name' => $request->name]
+        );;
 
         $role->syncPermissions($permission_ids);
+
+        return \response('success', 200);
+    }
+    public function editRole($role)
+    {
+        $role = Role::where('id', $role)->with('permissions')->first();
+        return $role;
+    }
+    //delete role
+    public function deleteRole(Role $role)
+    {
+        $role->permissions()->detach();
+        $role->delete();
+
+        return \response('success', 200);
+    }
+
+    //permission
+    public function savePermission(Request $request)
+    {
+        $permission = Permission::updateOrCreate(
+            ['id' => $request->id],
+            ['name' => $request->name]
+        );
+
+        return \response('success', 200);
+    }
+
+    public function editPermission(Permission $permission)
+    {
+        return $permission;
+    }
+    public function deletePermission(Permission $permission)
+    {
+        $permission->roles()->detach();
+        $permission->delete();
 
         return \response('success', 200);
     }

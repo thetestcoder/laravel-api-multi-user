@@ -17,6 +17,7 @@
       <input
         v-bind:id="id"
         class="form-check-input"
+        :checked="ischecked"
         v-bind:type="type"
         :value="checkboxvalue"
         @change="onCheckboxChange"
@@ -33,7 +34,8 @@ export default {
     type: String,
     placeholder: String,
     checkboxvalue: Number,
-    inputvalue: undefined
+    inputvalue: undefined,
+    ischecked: Boolean
   },
   model: {
     prop: "inputvalue",
