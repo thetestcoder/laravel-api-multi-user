@@ -34,6 +34,15 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/permission/{permission}', "RolePermissionController@editPermission");
     Route::delete('/delete-permission/{permission}', "RolePermissionController@deletePermission");
 
+    //users route
+    Route::get('/fetch/users', "UserController@fetchUsers");
+    Route::get('/fetch/all-roles', "UserController@fetchAllRoles");
+    Route::get('/user/fetch/{id}', "UserController@onEdit");
+    Route::post('/user/create', "UserController@saveUser");
+    Route::put('/user/update', "UserController@updateUser");
+    Route::delete('/user/delete/{id}', "UserController@deleteUser");
+    Route::put('/user/change-password', "UserController@changePassword");
+
 
 
     Route::view('/{any?}', 'backend.layouts.app');

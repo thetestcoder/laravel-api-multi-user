@@ -24,6 +24,12 @@
                 </a>
             </li>
             <li>
+                <a>
+                    <i class="nc-icon nc-single-02"></i>
+                    <router-link to="/admin/users" class="text-gray">Users</router-link>
+                </a>
+            </li>
+            <li>
                 <a href="#">
                     <i class="nc-icon nc-pin-3"></i>
                     <p>Maps</p>

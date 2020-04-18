@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Casts\CreateAtCast;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -36,5 +37,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at'        => CreateAtCast::class,
     ];
+
+    protected $dates = ['created_at', 'updated_at'];
 }
