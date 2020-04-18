@@ -2486,6 +2486,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2518,18 +2519,26 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchRoles();
   },
   methods: {
-    fetchUsers: function fetchUsers() {
+    getResults: function getResults() {
       var _this = this;
 
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get("/admin/fetch/users?page=" + page).then(function (response) {
+        _this.users = response.data;
+      });
+    },
+    fetchUsers: function fetchUsers() {
+      var _this2 = this;
+
       axios.get("/admin/fetch/users").then(function (res) {
-        _this.users = res.data;
+        _this2.users = res.data;
       });
     },
     fetchRoles: function fetchRoles() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/admin/fetch/all-roles").then(function (res) {
-        _this2.roles = res.data;
+        _this3.roles = res.data;
       });
     },
     onClose: function onClose() {
@@ -2542,19 +2551,19 @@ __webpack_require__.r(__webpack_exports__);
       this.temp_id = "";
     },
     onEdit: function onEdit(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.onClose();
       axios.get("/admin/user/fetch/" + id).then(function (res) {
-        _this3.data.id = res.data.id;
-        _this3.data.name = res.data.name;
-        _this3.data.email = res.data.email;
-        _this3.data.role_id = res.data.roles[0].id;
-        _this3.is_update = true;
+        _this4.data.id = res.data.id;
+        _this4.data.name = res.data.name;
+        _this4.data.email = res.data.email;
+        _this4.data.role_id = res.data.roles[0].id;
+        _this4.is_update = true;
       });
     },
     saveUser: function saveUser() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.is_update) {
         var method = axios.put;
@@ -2565,25 +2574,25 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       method(url, this.data).then(function (res) {
-        _this4.onClose();
+        _this5.onClose();
 
-        _this4.$root.closeModal("#add-user");
+        _this5.$root.closeModal("#add-user");
 
-        _this4.fetchUsers();
+        _this5.fetchUsers();
       })["catch"](function (err) {
-        if (err.response.status == 422) _this4.errors = err.response.data.errors;
+        if (err.response.status == 422) _this5.errors = err.response.data.errors;
       });
     },
     changePassword: function changePassword() {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.put("/admin/user/change-password", this.data).then(function (res) {
-        _this5.onClose();
+        _this6.onClose();
 
-        _this5.$root.closeModal("#change-password");
+        _this6.$root.closeModal("#change-password");
       })["catch"](function (err) {
         if (err.response.status == 422) {
-          _this5.errors = err.response.data.errors;
+          _this6.errors = err.response.data.errors;
         }
       });
     },
@@ -2594,14 +2603,14 @@ __webpack_require__.r(__webpack_exports__);
       this.temp_id = temp_id;
     },
     deleteUser: function deleteUser() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios["delete"]("/admin/user/delete/" + this.temp_id).then(function (res) {
-        _this6.onClose();
+        _this7.onClose();
 
-        _this6.fetchUsers();
+        _this7.fetchUsers();
 
-        _this6.$root.closeModal("#delete");
+        _this7.$root.closeModal("#delete");
       });
     }
   }
@@ -39344,81 +39353,90 @@ var render = function() {
               _vm._v("Users")
             ]),
             _vm._v(" "),
-            _c("div", [
-              _c(
-                "table",
-                { staticClass: "table table-bordered table-hover" },
-                [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _vm._l(_vm.users.data, function(user) {
-                    return _c("tr", { key: user.id }, [
-                      _c("td", [_vm._v(_vm._s(user.name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(user.email))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(user.roles[0].name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(user.created_at))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary btn-sm",
-                            attrs: {
-                              "data-toggle": "modal",
-                              "data-target": "#change-password"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.onChangePass(user.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Change Password")]
-                        ),
+            _c(
+              "div",
+              [
+                _c(
+                  "table",
+                  { staticClass: "table table-bordered table-hover" },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm._l(_vm.users.data, function(user) {
+                      return _c("tr", { key: user.id }, [
+                        _c("td", [_vm._v(_vm._s(user.name))]),
                         _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-warning btn-sm",
-                            attrs: {
-                              "data-toggle": "modal",
-                              "data-target": "#add-user"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.onEdit(user.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Edit")]
-                        ),
+                        _c("td", [_vm._v(_vm._s(user.email))]),
                         _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger btn-sm",
-                            attrs: {
-                              "data-toggle": "modal",
-                              "data-target": "#delete"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.wantToDelete(user.id)
+                        _c("td", [_vm._v(_vm._s(user.roles[0].name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(user.created_at))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary btn-sm",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#change-password"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.onChangePass(user.id)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("Delete")]
-                        )
+                            },
+                            [_vm._v("Change Password")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-warning btn-sm",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#add-user"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.onEdit(user.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger btn-sm",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#delete"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.wantToDelete(user.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ])
                       ])
-                    ])
-                  })
-                ],
-                2
-              )
-            ])
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("pagination", {
+                  attrs: { data: _vm.users },
+                  on: { "pagination-change-page": _vm.getResults }
+                })
+              ],
+              1
+            )
           ])
         ],
         1

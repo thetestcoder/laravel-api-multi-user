@@ -113,6 +113,7 @@
                 </td>
               </tr>
             </table>
+            <pagination :data="users" @pagination-change-page="getResults"></pagination>
           </div>
         </div>
       </div>
@@ -152,6 +153,11 @@ export default {
     this.fetchRoles();
   },
   methods: {
+    getResults(page = 1) {
+      axios.get("/admin/fetch/users?page=" + page).then(response => {
+        this.users = response.data;
+      });
+    },
     fetchUsers() {
       axios.get("/admin/fetch/users").then(res => {
         this.users = res.data;
