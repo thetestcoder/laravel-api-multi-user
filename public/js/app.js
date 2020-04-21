@@ -55087,7 +55087,8 @@ var routes = [{
 
 var routers = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
-  routes: routes
+  routes: routes,
+  linkExactActiveClass: "exact-active"
 });
 /* harmony default export */ __webpack_exports__["default"] = (routers);
 

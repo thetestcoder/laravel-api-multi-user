@@ -6,6 +6,8 @@ import Home from './components/routes/Home.vue';
 import Role from './components/routes/Role.vue';
 import User from './components/routes/Users.vue';
 
+
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -14,11 +16,11 @@ const routes = [
     { path: '/admin/users', component: User }
 ];
 
-
 //router assign
 const routers = new VueRouter({
     mode: 'history',
     routes,
+    linkExactActiveClass: "exact-active",
 
 });
 

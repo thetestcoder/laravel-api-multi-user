@@ -1,64 +1,53 @@
 <div class="sidebar" data-color="red" data-active-color="danger">
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+        <router-link to="/admin" class="simple-text logo-mini">
             <div class="logo-image-small">
                 <img src="../assets/img/logo-small.png">
             </div>
-        </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            User Name
-        </a>
+        </router-link>
+        <router-link to="/admin" class="simple-text logo-normal">
+            {{name()}}
+        </router-link>
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="active ">
-                <a>
-                    <i class="nc-icon nc-bank"></i>
-                    <router-link to="/admin" class="text-white">Dashboard</router-link>
+            <router-link to="/admin" class="text-light">
+                <li>
+                    <a>
+                        <i class="nc-icon nc-bank"></i>
+                        Dashboard
+                    </a>
+                </li>
+            </router-link>
+            <router-link to="/admin/role" class="text-light">
+                <li>
+                    <a>
+                        <i class="nc-icon nc-diamond"></i>
+                        Roles
+                    </a>
+                </li>
+            </router-link>
+            <router-link to="/admin/users" class="text-light">
+                <li>
+                    <a>
+                        <i class="nc-icon nc-single-02"></i>
+                        Users
+                    </a>
+                </li>
+            </router-link>
+
+
+            <li class="active-pro">
+                <a class="btn btn-primary" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    <i class="nc-icon nc-spaceship"></i>
+                    <p>Logout</p>
                 </a>
-            </li>
-            <li>
-                <a>
-                    <i class="nc-icon nc-diamond"></i>
-                    <router-link to="/admin/role" class="text-gray">Roles</router-link>
-                </a>
-            </li>
-            <li>
-                <a>
-                    <i class="nc-icon nc-single-02"></i>
-                    <router-link to="/admin/users" class="text-gray">Users</router-link>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="nc-icon nc-pin-3"></i>
-                    <p>Maps</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>Notifications</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="nc-icon nc-single-02"></i>
-                    <p>User Profile</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="nc-icon nc-tile-56"></i>
-                    <p>Table List</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="nc-icon nc-caps-small"></i>
-                    <p>Typography</p>
-                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </li>
         </ul>
+
     </div>
 </div>

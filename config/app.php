@@ -169,6 +169,13 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
 
         /*
+         * Own Service Providers...
+         */
+
+        App\Providers\UserFacadeServiceProvider::class,
+        App\Providers\GlobalHelperServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,

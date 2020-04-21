@@ -101,6 +101,10 @@
   margin: 100px auto;
 }
 
+.exact-active li {
+  background-color: #f15e5e;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
